@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nesion - Enterprise License Pricing</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --surface: #111111;
+            --surface2: #161616;
+            --border: #222222;
+            --text: #e2e2e2;
+            --muted: #666666;
+            --accent: #00c47d;
+            --accent-hover: #00a86b;
+            --danger: #e24b4a;
+            --warning: #ef9f27;
+            --mono: 'JetBrains Mono', 'Consolas', monospace;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --radius: 8px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-main);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a { color: var(--accent); text-decoration: none; transition: color 0.2s; cursor: pointer; }
+        a:hover { color: var(--accent-hover); }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 2rem; width: 100%; }
+
+        /* Typography */
+        h1, h2, h3, h4 { font-weight: 600; color: #fff; letter-spacing: -0.02em; }
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; text-align: center; }
+        h2 { font-size: 1.75rem; margin-bottom: 1rem; }
+        h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        p { margin-bottom: 1rem; }
+        .subtitle { color: var(--muted); font-size: 1.1rem; text-align: center; max-width: 600px; margin: 0 auto 3rem auto; font-weight: 400;}
+
+        /* Buttons */
+        button, .btn {
+            background: var(--surface2);
+            color: #fff;
+            border: 1px solid var(--border);
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            text-align: center;
+            width: 100%;
+        }
+        button:hover, .btn:hover { background: var(--border); }
+        button.primary, .btn.primary {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+        button.primary:hover, .btn.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+        button.ghost { background: transparent; border-color: transparent; color: var(--accent); }
+        button.ghost:hover { background: rgba(0, 196, 125, 0.1); border-color: transparent; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* Grid */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .card.featured {
+            border: 1px solid var(--accent);
+            box-shadow: 0 0 20px rgba(0, 196, 125, 0.1);
+        }
+        .card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -12px; left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 12px;
+            letter-spacing: 0.05em;
+        }
+        .card-price { font-size: 2rem; font-weight: 700; color: #fff; margin: 1rem 0 0.25rem 0;}
+        .card-price span { font-size: 1rem; color: var(--muted); font-weight: 400; }
+        .card-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; height: 40px;}
+        .card-features { margin: 1.5rem 0; flex-grow: 1; list-style: none; padding: 0;}
+        .card-features li { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 0.75rem; font-size: 0.9rem;}
+        .card-features li svg { flex-shrink: 0; margin-top: 2px; }
+        .card-features li.negative { color: var(--muted); }
+        .card-features li.negative svg { opacity: 0.5; }
+
+        /* Utilities */
+        .section-title { text-align: center; margin-bottom: 2rem; }
+        .divider { height: 1px; background: var(--border); margin: 4rem 0; width: 100%;}
+        
+        /* Interactive Calculator */
+        .calc-wrapper {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .calc-slider-container { display: flex; align-items: center; gap: 1rem; margin: 2rem 0; }
+        input[type=range] {
+            flex-grow: 1;
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px; width: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            margin-top: -8px;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%; height: 4px;
+            cursor: pointer;
+            background: var(--border);
+            border-radius: 2px;
+        }
+        .calc-gpu-count {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-family: var(--mono);
+            font-size: 1.2rem;
+            font-weight: bold;
+            min-width: 80px;
+            text-align: center;
+        }
+        .calc-results {
+            background: var(--surface2);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border: 1px solid var(--accent);
+        }
+        .calc-result-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;}
+        .calc-result-row.total { font-weight: bold; color: var(--accent); font-size: 1.2rem; border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 0.5rem;}
+
+        /* Form */
+        .form-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group { margin-bottom: 1.25rem; text-align: left; }
+        .form-label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 500; color: #ccc;}
+        .form-control {
+            width: 100%; background: var(--surface2); border: 1px solid var(--border);
+            color: var(--text); padding: 0.75rem 1rem; border-radius: var(--radius);
+            font-family: inherit; font-size: 1rem; outline: none; transition: border-color 0.2s;
+        }
+        .form-control:focus { border-color: var(--accent); }
+        .form-text { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; display: block;}
+        
+        .success-box {
+            background: rgba(0, 196, 125, 0.1); border: 1px solid var(--accent);
+            padding: 1.5rem; border-radius: var(--radius); display: none; text-align: center;
+        }
+        .error-msg { color: var(--danger); font-size: 0.85rem; margin-top: 0.5rem; display: none; text-align: center;}
+
+        /* FAQ */
+        .faq-grid { max-width: 800px; margin: 0 auto; display: grid; gap: 1.5rem; }
+        .faq-item h4 { margin-bottom: 0.5rem; color: var(--accent); }
+        .faq-item p { color: #adb5bd; font-size: 0.95rem; }
+
+        /* Footer */
+        footer { margin-top: auto; padding: 3rem 0 2rem; text-align: center; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem;}
+        footer a { color: var(--muted); text-decoration: underline; }
+        footer a:hover { color: var(--text); }
+        
+        /* Icons */
+        .icon { stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+        .icon-check { color: var(--accent); }
+        .icon-x { color: var(--muted); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- 1. HERO SMALL -->
+    <h1>Nesion Enterprise License</h1>
+    <p class="subtitle">Production use for teams running &ge;4 GPUs.<br>Simple per-GPU pricing. No contracts. Cancel anytime.</p>
+
+    <!-- 2. PRICING CARDS -->
+    <div class="pricing-grid">
+        
+        <!-- FREE TIER -->
+        <div class="card">
+            <h3>Community</h3>
+            <p class="card-desc">For researchers, solo devs, and startups scaling up to 3 GPUs.</p>
+            <div class="card-price">Free<span> forever</span></div>
+            
+            <ul class="card-features">
+                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Full MIT source code</li>
+                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> <code>pip install nesion</code> access</li>
+                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Benchmarks & Documentation</li>
+                <li class="negative"><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Commercial use with &ge;4 GPUs</li>
+                <li class="negative"><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Support & SLA</li>
+            </ul>
+            
+            <a href="https://github.com/carloscostagarcia/nesion" class="btn">Download on GitHub</a>
+        </div>
+
+        <!-- ENTERPRISE TIER -->
+        <div class="card featured">
+            <h3>Enterprise</h3>
+            <p class="card-desc">For companies running &ge;4 GPUs in production.</p>
+            <div class="card-price">$49<span>/GPU/month</span></div>
+            
+            <ul class="card-features">
+                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Production License Key</li>
+                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> 48h Email Support</li>
+                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> All updates included</li>
+                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Monthly consolidated invoice</li>
+                <li class="negative"><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Dedicated SLA & White-label</li>
+            </ul>
+            
+            <button class="primary" onclick="scrollToForm()">Get Started — 14-day free trial</button>
+            <p style="font-size: 0.75rem; color: var(--muted); text-align: center; margin: 0.5rem 0 0 0;">Billed monthly via PayPal. Cancel anytime.</p>
+        </div>
+
+        <!-- OEM TIER -->
+        <div class="card">
+            <h3>OEM / Custom</h3>
+            <p class="card-desc">For cloud providers, inference platforms, and product redistribution.</p>
+            <div class="card-price">Custom</div>
+            
+            <ul class="card-features">
+                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Volume pricing tiers</li>
+                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Dedicated SLA</li>
+                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> White-label permitted</li>
+                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Direct technical support channel</li>
+            </ul>
+            
+            <a href="mailto:license@nesion.net" class="btn ghost">Talk to us &rarr;</a>
+        </div>
+
+    </div>
+
+    <!-- 3. CACULADORA DE PRECIO -->
+    <div class="calc-wrapper">
+        <h2 class="section-title" style="margin-bottom:0.5rem">Calculate your ROI</h2>
+        <p class="subtitle" style="margin: 0 auto; max-width:800px;">See how much you save by cutting VRAM requirements with Nesion.</p>
+        
+        <div class="calc-slider-container">
+            <span style="color:var(--muted)">4</span>
+            <input type="range" id="gpuSlider" min="4" max="500" value="8" step="1">
+            <span style="color:var(--muted)">500+</span>
+            <div class="calc-gpu-count" id="gpuCountDisplay">8 GPUs</div>
+        </div>
+
+        <div class="calc-results">
+            <div class="calc-result-row">
+                <span style="color: #aaa">License Cost (<span id="calcGpuLabel">8</span> GPUs &times; $49)</span>
+                <span style="font-family: var(--mono); color: #fff" id="calcNesionCost">$392 / month</span>
+            </div>
+            <div class="calc-result-row" style="opacity: 0.8;">
+                <span style="font-size: 0.85rem; color: #888">Estimated VRAM savings vs standard deployment<br>(Assuming $2,500/mo per H100 and a 43% reduction)</span>
+                <span style="font-family: var(--mono); color: var(--accent);">~$<span id="calcVramSavings">8,600</span> / month</span>
+            </div>
+            <div class="calc-result-row total">
+                <span>Net System Savings</span>
+                <span style="font-family: var(--mono); font-size: 1.5rem;" id="calcNetSavings">$8,208 / month</span>
+            </div>
+        </div>
+        <p style="font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 1rem;">* Projections based on average H2O eviction performance. Actual VRAM reduction depends on prompt lengths and model configuration.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 4. FORMULARIO DE ACTIVACIÓN -->
+    <div class="form-section" id="activation-form">
+        <h2 class="section-title" style="margin-bottom:0.5rem">Start your Enterprise Trial</h2>
+        <p style="text-align:center; color:var(--muted); margin-bottom:2rem;">Start scaling efficiently. 14 days free.</p>
+        
+        <form id="licenseForm" onsubmit="submitLicenseForm(event)">
+            <div class="form-group">
+                <label class="form-label" for="f_email">Corporate Email</label>
+                <input type="email" id="f_email" class="form-control" placeholder="steve@acmecorp.com" required>
+                <span class="form-text">We don't accept generic addresses (gmail, hotmail, etc.) for trials.</span>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="f_company">Company Name</label>
+                <input type="text" id="f_company" class="form-control" placeholder="Acme AI Corp" required>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem;">
+                <div class="form-group">
+                    <label class="form-label" for="f_gpus">Number of GPUs</label>
+                    <input type="number" id="f_gpus" class="form-control" min="4" max="1000" value="8" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="f_usecase">Primary Use Case</label>
+                    <select id="f_usecase" class="form-control" required style="appearance:none;">
+                        <option value="inference_api">Inference API / LLM Hosting</option>
+                        <option value="fine_tuning">Fine-Tuning</option>
+                        <option value="research">Research / Internal Tools</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="formError" class="error-msg"></div>
+
+            <button type="submit" class="primary" id="submitBtn" style="margin-top: 1rem; padding: 1rem; font-size: 1.05rem;">
+                Start 14-day free trial
+            </button>
+            <p style="font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 1rem;">No credit card required to start.</p>
+        </form>
+
+        <div class="success-box" id="successBox">
+            <svg width="48" height="48" viewBox="0 0 24 24" class="icon icon-check" style="margin: 0 auto 1rem auto; display:block;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <h3 style="color:var(--text);">License Created Successfully!</h3>
+            <p style="color:var(--muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Save your license key immediately. You'll need it to authenticate your engine.</p>
+            
+            <div style="background:var(--bg); border:1px solid var(--border); border-radius:var(--radius); padding:1rem; margin-bottom:1rem;">
+                <code id="successKey" style="font-family:var(--mono); font-size:0.85rem; color: #fff; word-break:break-all;"></code>
+            </div>
+            
+            <button onclick="copyGeneratedKey()" class="btn">Copy Key to Clipboard</button>
+            
+            <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+                <p style="color:var(--muted); font-size: 0.9rem;">To active the trial limits and complete billing setup later:</p>
+                <a href="#" id="successPortalUrl" target="_blank" class="primary btn" style="margin-top:0.5rem;">Open Customer Portal &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 5. FAQ -->
+    <div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <h4>What counts as a GPU for licensing?</h4>
+                <p>Any CUDA, ROCm, or MPS device where <code>NesionEngine</code> is actively evicting Cache tokens during inference in a production environment. Developer machines, test clusters, and idle instances do not count toward your license limit.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I use Nesion for free?</h4>
+                <p>Yes. Research, personal projects, and production deployments utilizing fewer than 4 GPUs are always free under the MIT license terms provided in our repo.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What happens if I don't get a license?</h4>
+                <p>For clusters &ge;4 GPUs, Nesion will display a console warning but continue to function seamlessly for a 30-day grace period. Continued commercial use without a valid license after this period violates the commercial terms.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I try before buying?</h4>
+                <p>Yes. All Enterprise licenses include a 14-day free trial period. No credit card is required to generate the key and start testing your specific model workloads.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- 6. FOOTER -->
+<footer>
+    <div style="margin-bottom: 0.5rem;">
+        <a href="mailto:license@nesion.net">license@nesion.net</a> &nbsp;|&nbsp; 
+        <a href="https://nesion.net">nesion.net</a> &nbsp;|&nbsp; 
+        <a href="https://github.com/carloscostagarcia/nesion/blob/main/LICENSE">MIT for non-commercial use</a>
+    </div>
+    <div style="opacity:0.5;">&copy; <span id="year"></span> Nesion Engineering. All rights reserved.</div>
+</footer>
+
+<script>
+    // Config
+    const DEMO_MODE = false; 
+    const API_BASE = "https://nesion.net/api/v1";
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // -- Calculator Logic --
+    const slider = document.getElementById('gpuSlider');
+    const gpuDisplay = document.getElementById('gpuCountDisplay');
+    const lblGpus = document.getElementById('calcGpuLabel');
+    const valCost = document.getElementById('calcNesionCost');
+    const valSavings = document.getElementById('calcVramSavings');
+    const valNet = document.getElementById('calcNetSavings');
+
+    const formatter = new Intl.NumberFormat('en-US');
+
+    function updateCalculator() {
+        const gpus = parseInt(slider.value, 10);
+        gpuDisplay.textContent = `${gpus} GPUs`;
+        lblGpus.textContent = gpus;
+        
+        // Formula
+        const gpuCostPerMonth = gpus * 2500; 
+        const vramSavings = gpuCostPerMonth * 0.43;
+        const nesionCost = gpus * 49;
+        const netSavings = vramSavings - nesionCost;
+
+        valCost.textContent = `$${formatter.format(nesionCost)} / month`;
+        valSavings.textContent = `~$${formatter.format(Math.round(vramSavings))} / month`;
+        valNet.textContent = `$${formatter.format(Math.round(netSavings))} / month`;
+    }
+
+    slider.addEventListener('input', updateCalculator);
+    updateCalculator(); // init
+
+
+    // -- Form Logic --
+    function scrollToForm() {
+        document.getElementById('activation-form').scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('f_email').focus();
+    }
+
+    const freeEmailDomains = [
+        'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 
+        'aol.com', 'icloud.com', 'protonmail.com', 'mail.ru'
+    ];
+
+    async function submitLicenseForm(e) {
+        e.preventDefault();
+        
+        const errorEl = document.getElementById('formError');
+        const btn = document.getElementById('submitBtn');
+        errorEl.style.display = 'none';
+
+        const email = document.getElementById('f_email').value.trim();
+        const company = document.getElementById('f_company').value.trim();
+        const gpus = parseInt(document.getElementById('f_gpus').value, 10);
+
+        // Validation
+        const domain = email.split('@')[1];
+        if (domain && freeEmailDomains.includes(domain.toLowerCase())) {
+            errorEl.textContent = "Please use a corporate email address (not a generic provider).";
+            errorEl.style.display = 'block';
+            return;
+        }
+        
+        if (gpus < 4) {
+            errorEl.textContent = "Enterprise licenses require a minimum of 4 GPUs.";
+            errorEl.style.display = 'block';
+            return;
+        }
+
+        // Loading
+        const origText = btn.innerText;
+        btn.innerHTML = "Processing...";
+        btn.disabled = true;
+
+        const payload = {
+            email: email,
+            company: company,
+            gpu_count: gpus,
+            tier: "enterprise",
+            price_override: null
+        };
+
+        try {
+            let resData;
+
+            if (DEMO_MODE) {
+                // Mock request
+                await new Promise(r => setTimeout(r, 1200));
+                resData = {
+                    license_key: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZW1vX3V1aWQiLCJpc3MiOiJuZXNpb24ubmV0IiwiaWF0IjoxNzEzNzMwODAzLCJncHVfbGltaXQiOjgsInRpZXIiOiJlbnRlcnByaXNlIn0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+                    paypal_approval_url: "https://www.paypal.com/checkoutnow?token=test_12345"
+                };
+            } else {
+                // We use your ADMIN_TOKEN here for POST /v1/license/create if this form is public? 
+                // Wait, if it's public it shouldn't need a hardcoded admin token. 
+                // For this HTML we will assume a public proxy or valid auth. 
+                const authProxyEndpoint = `${API_BASE}/license/create-checkout`; // Adjust based on your API exposure
+                
+                const response = await fetch(authProxyEndpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) {
+                    const errorJson = await response.json().catch(() => ({}));
+                    throw new Error(errorJson.detail || "Failed to create license. Try again.");
+                }
+                resData = await response.json();
+            }
+
+            // Success Transition
+            document.getElementById('licenseForm').style.display = 'none';
+            document.querySelector('#activation-form h2').style.display = 'none';
+            document.querySelector('#activation-form p').style.display = 'none';
+            
+            const successBox = document.getElementById('successBox');
+            successBox.style.display = 'block';
+            document.getElementById('successKey').textContent = resData.license_key;
+            
+            // Adjusting URL using paypal_approval_url from backend
+            const checkoutUrl = resData.paypal_approval_url || '#';
+            document.getElementById('successPortalUrl').href = checkoutUrl;
+
+        } catch (err) {
+            errorEl.textContent = err.message;
+            errorEl.style.display = 'block';
+            btn.innerHTML = origText;
+            btn.disabled = false;
+        }
+    }
+
+    function copyGeneratedKey() {
+        const keyText = document.getElementById('successKey').textContent;
+        navigator.clipboard.writeText(keyText).then(() => {
+            alert("License key copied to clipboard!");
+        });
+    }
+</script>
+</body>
+</html>
