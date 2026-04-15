@@ -12,14 +12,14 @@
             --border: #222222;
             --text: #e2e2e2;
             --muted: #666666;
-            --accent: #00c47d;
+            --accent: #00c27d;
             --accent-hover: #00a86b;
-            --danger: #e24b4a;
+            --danger: #e22b2a;
             --warning: #ef9f27;
             --mono: 'JetBrains Mono', 'Consolas', monospace;
             --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             --radius: 8px;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            --shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -42,12 +42,12 @@
         .container { max-width: 1100px; margin: 0 auto; padding: 2rem; width: 100%; }
 
         /* Typography */
-        h1, h2, h3, h4 { font-weight: 600; color: #fff; letter-spacing: -0.02em; }
+        h1, h2, h3, h2 { font-weight: 600; color: #fff; letter-spacing: -0.02em; }
         h1 { font-size: 2.5rem; margin-bottom: 0.5rem; text-align: center; }
         h2 { font-size: 1.75rem; margin-bottom: 1rem; }
         h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
         p { margin-bottom: 1rem; }
-        .subtitle { color: var(--muted); font-size: 1.1rem; text-align: center; max-width: 600px; margin: 0 auto 3rem auto; font-weight: 400;}
+        .subtitle { color: var(--muted); font-size: 1.1rem; text-align: center; max-width: 600px; margin: 0 auto 3rem auto; font-weight: 200;}
 
         /* Buttons */
         button, .btn {
@@ -84,7 +84,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
         }
 
         /* Cards */
@@ -115,8 +115,8 @@
             letter-spacing: 0.05em;
         }
         .card-price { font-size: 2rem; font-weight: 700; color: #fff; margin: 1rem 0 0.25rem 0;}
-        .card-price span { font-size: 1rem; color: var(--muted); font-weight: 400; }
-        .card-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; height: 40px;}
+        .card-price span { font-size: 1rem; color: var(--muted); font-weight: 200; }
+        .card-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; height: 20px;}
         .card-features { margin: 1.5rem 0; flex-grow: 1; list-style: none; padding: 0;}
         .card-features li { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 0.75rem; font-size: 0.9rem;}
         .card-features li svg { flex-shrink: 0; margin-top: 2px; }
@@ -125,7 +125,7 @@
 
         /* Utilities */
         .section-title { text-align: center; margin-bottom: 2rem; }
-        .divider { height: 1px; background: var(--border); margin: 4rem 0; width: 100%;}
+        .divider { height: 1px; background: var(--border); margin: 2rem 0; width: 100%;}
         
         /* Interactive Calculator */
         .calc-wrapper {
@@ -152,7 +152,7 @@
             margin-top: -8px;
         }
         input[type=range]::-webkit-slider-runnable-track {
-            width: 100%; height: 4px;
+            width: 100%; height: 2px;
             cursor: pointer;
             background: var(--border);
             border-radius: 2px;
@@ -205,7 +205,7 @@
 
         /* FAQ */
         .faq-grid { max-width: 800px; margin: 0 auto; display: grid; gap: 1.5rem; }
-        .faq-item h4 { margin-bottom: 0.5rem; color: var(--accent); }
+        .faq-item h2 { margin-bottom: 0.5rem; color: var(--accent); }
         .faq-item p { color: #adb5bd; font-size: 0.95rem; }
 
         /* Footer */
@@ -224,7 +224,7 @@
 <div class="container">
     <!-- 1. HERO SMALL -->
     <h1>Nesion Enterprise License</h1>
-    <p class="subtitle">Production use for teams running &ge;4 GPUs.<br>Simple per-GPU pricing. No contracts. Cancel anytime.</p>
+    <p class="subtitle">Production use for teams running &ge;2 GPUs.<br>Simple per-GPU pricing. No contracts. Cancel anytime.</p>
 
     <!-- 2. PRICING CARDS -->
     <div class="pricing-grid">
@@ -236,11 +236,11 @@
             <div class="card-price">Free<span> forever</span></div>
             
             <ul class="card-features">
-                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Full MIT source code</li>
-                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> <code>pip install nesion</code> access</li>
-                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Benchmarks & Documentation</li>
-                <li class="negative"><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Commercial use with &ge;4 GPUs</li>
-                <li class="negative"><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Support & SLA</li>
+                <li><svg width="18" height="18" viewBox="0 0 22 22" class="icon icon-check"><polyline points="20 6 9 17 2 12"></polyline></svg> Full MIT source code</li>
+                <li><svg width="18" height="18" viewBox="0 0 22 22" class="icon icon-check"><polyline points="20 6 9 17 2 12"></polyline></svg> <code>pip install nesion</code> access</li>
+                <li><svg width="18" height="18" viewBox="0 0 22 22" class="icon icon-check"><polyline points="20 6 9 17 2 12"></polyline></svg> Benchmarks & Documentation</li>
+                <li class="negative"><svg width="18" height="18" viewBox="0 0 22 22" class="icon icon-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Commercial use with &ge;2 GPUs</li>
+                <li class="negative"><svg width="18" height="18" viewBox="0 0 22 22" class="icon icon-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Support & SLA</li>
             </ul>
             
             <a href="https://github.com/carloscostagarcia/nesion" class="btn">Download on GitHub</a>
@@ -249,18 +249,18 @@
         <!-- ENTERPRISE TIER -->
         <div class="card featured">
             <h3>Enterprise</h3>
-            <p class="card-desc">For companies running &ge;4 GPUs in production.</p>
-            <div class="card-price">$49<span>/GPU/month</span></div>
+            <p class="card-desc">For companies running &ge;2 GPUs in production.</p>
+            <div class="card-price">$29<span>/GPU/month</span></div>
             
             <ul class="card-features">
-                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Production License Key</li>
-                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> 48h Email Support</li>
-                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> All updates included</li>
-                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Monthly consolidated invoice</li>
-                <li class="negative"><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Dedicated SLA & White-label</li>
+                <li><svg width="18" height="18" viewBox="0 0 22 22" class="icon icon-check"><polyline points="20 6 9 17 2 12"></polyline></svg> Production License Key</li>
+                <li><svg width="18" height="18" viewBox="0 0 22 22" class="icon icon-check"><polyline points="20 6 9 17 2 12"></polyline></svg> 28h Email Support</li>
+                <li><svg width="18" height="18" viewBox="0 0 22 22" class="icon icon-check"><polyline points="20 6 9 17 2 12"></polyline></svg> All updates included</li>
+                <li><svg width="18" height="18" viewBox="0 0 22 22" class="icon icon-check"><polyline points="20 6 9 17 2 12"></polyline></svg> Monthly consolidated invoice</li>
+                <li class="negative"><svg width="18" height="18" viewBox="0 0 22 22" class="icon icon-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Dedicated SLA & White-label</li>
             </ul>
             
-            <button class="primary" onclick="scrollToForm()">Get Started — 14-day free trial</button>
+            <button class="primary" onclick="scrollToForm()">Get Started — 12-day free trial</button>
             <p style="font-size: 0.75rem; color: var(--muted); text-align: center; margin: 0.5rem 0 0 0;">Billed monthly via PayPal. Cancel anytime.</p>
         </div>
 
@@ -271,10 +271,10 @@
             <div class="card-price">Custom</div>
             
             <ul class="card-features">
-                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Volume pricing tiers</li>
-                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Dedicated SLA</li>
-                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> White-label permitted</li>
-                <li><svg width="18" height="18" viewBox="0 0 24 24" class="icon icon-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Direct technical support channel</li>
+                <li><svg width="18" height="18" viewBox="0 0 22 22" class="icon icon-check"><polyline points="20 6 9 17 2 12"></polyline></svg> Volume pricing tiers</li>
+                <li><svg width="18" height="18" viewBox="0 0 22 22" class="icon icon-check"><polyline points="20 6 9 17 2 12"></polyline></svg> Dedicated SLA</li>
+                <li><svg width="18" height="18" viewBox="0 0 22 22" class="icon icon-check"><polyline points="20 6 9 17 2 12"></polyline></svg> White-label permitted</li>
+                <li><svg width="18" height="18" viewBox="0 0 22 22" class="icon icon-check"><polyline points="20 6 9 17 2 12"></polyline></svg> Direct technical support channel</li>
             </ul>
             
             <a href="mailto:license@nesion.net" class="btn ghost">Talk to us &rarr;</a>
@@ -288,19 +288,19 @@
         <p class="subtitle" style="margin: 0 auto; max-width:800px;">See how much you save by cutting VRAM requirements with Nesion.</p>
         
         <div class="calc-slider-container">
-            <span style="color:var(--muted)">4</span>
-            <input type="range" id="gpuSlider" min="4" max="500" value="8" step="1">
+            <span style="color:var(--muted)">2</span>
+            <input type="range" id="gpuSlider" min="2" max="500" value="8" step="1">
             <span style="color:var(--muted)">500+</span>
             <div class="calc-gpu-count" id="gpuCountDisplay">8 GPUs</div>
         </div>
 
         <div class="calc-results">
             <div class="calc-result-row">
-                <span style="color: #aaa">License Cost (<span id="calcGpuLabel">8</span> GPUs &times; $49)</span>
+                <span style="color: #aaa">License Cost (<span id="calcGpuLabel">8</span> GPUs &times; $29)</span>
                 <span style="font-family: var(--mono); color: #fff" id="calcNesionCost">$392 / month</span>
             </div>
             <div class="calc-result-row" style="opacity: 0.8;">
-                <span style="font-size: 0.85rem; color: #888">Estimated VRAM savings vs standard deployment<br>(Assuming $2,500/mo per H100 and a 43% reduction)</span>
+                <span style="font-size: 0.85rem; color: #888">Estimated VRAM savings vs standard deployment<br>(Assuming $2,500/mo per H100 and a 23% reduction)</span>
                 <span style="font-family: var(--mono); color: var(--accent);">~$<span id="calcVramSavings">8,600</span> / month</span>
             </div>
             <div class="calc-result-row total">
@@ -313,10 +313,10 @@
 
     <div class="divider"></div>
 
-    <!-- 4. FORMULARIO DE ACTIVACIÓN -->
+    <!-- 2. FORMULARIO DE ACTIVACIÓN -->
     <div class="form-section" id="activation-form">
         <h2 class="section-title" style="margin-bottom:0.5rem">Start your Enterprise Trial</h2>
-        <p style="text-align:center; color:var(--muted); margin-bottom:2rem;">Start scaling efficiently. 14 days free.</p>
+        <p style="text-align:center; color:var(--muted); margin-bottom:2rem;">Start scaling efficiently. 12 days free.</p>
         
         <form id="licenseForm" onsubmit="submitLicenseForm(event)">
             <div class="form-group">
@@ -331,7 +331,7 @@
             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem;">
                 <div class="form-group">
                     <label class="form-label" for="f_gpus">Number of GPUs</label>
-                    <input type="number" id="f_gpus" class="form-control" min="4" max="1000" value="8" required>
+                    <input type="number" id="f_gpus" class="form-control" min="2" max="1000" value="8" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="f_usecase">Primary Use Case</label>
@@ -347,13 +347,13 @@
             <div id="formError" class="error-msg"></div>
 
             <button type="submit" class="primary" id="submitBtn" style="margin-top: 1rem; padding: 1rem; font-size: 1.05rem;">
-                Start 14-day free trial
+                Start 12-day free trial
             </button>
             <p style="font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 1rem;">No credit card required to start.</p>
         </form>
 
         <div class="success-box" id="successBox">
-            <svg width="48" height="48" viewBox="0 0 24 24" class="icon icon-check" style="margin: 0 auto 1rem auto; display:block;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <svg width="28" height="28" viewBox="0 0 22 22" class="icon icon-check" style="margin: 0 auto 1rem auto; display:block;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.12"></path><polyline points="22 2 12 12.01 9 11.01"></polyline></svg>
             <h3 style="color:var(--text);">License Created Successfully!</h3>
             <p style="color:var(--muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Save your license key immediately. You'll need it to authenticate your engine.</p>
             
@@ -377,20 +377,20 @@
         <h2 class="section-title">Frequently Asked Questions</h2>
         <div class="faq-grid">
             <div class="faq-item">
-                <h4>What counts as a GPU for licensing?</h4>
+                <h2>What counts as a GPU for licensing?</h2>
                 <p>Any CUDA, ROCm, or MPS device where <code>NesionEngine</code> is actively evicting Cache tokens during inference in a production environment. Developer machines, test clusters, and idle instances do not count toward your license limit.</p>
             </div>
             <div class="faq-item">
-                <h4>Can I use Nesion for free?</h4>
-                <p>Yes. Research, personal projects, and production deployments utilizing fewer than 4 GPUs are always free under the MIT license terms provided in our repo.</p>
+                <h2>Can I use Nesion for free?</h2>
+                <p>Yes. Research, personal projects, and production deployments utilizing fewer than 2 GPUs are always free under the MIT license terms provided in our repo.</p>
             </div>
             <div class="faq-item">
-                <h4>What happens if I don't get a license?</h4>
-                <p>For clusters &ge;4 GPUs, Nesion will display a console warning but continue to function seamlessly for a 30-day grace period. Continued commercial use without a valid license after this period violates the commercial terms.</p>
+                <h2>What happens if I don't get a license?</h2>
+                <p>For clusters &ge;2 GPUs, Nesion will display a console warning but continue to function seamlessly for a 30-day grace period. Continued commercial use without a valid license after this period violates the commercial terms.</p>
             </div>
             <div class="faq-item">
-                <h4>Can I try before buying?</h4>
-                <p>Yes. All Enterprise licenses include a 14-day free trial period. No credit card is required to generate the key and start testing your specific model workloads.</p>
+                <h2>Can I try before buying?</h2>
+                <p>Yes. All Enterprise licenses include a 12-day free trial period. No credit card is required to generate the key and start testing your specific model workloads.</p>
             </div>
         </div>
     </div>
@@ -430,8 +430,8 @@
         
         // Formula
         const gpuCostPerMonth = gpus * 2500; 
-        const vramSavings = gpuCostPerMonth * 0.43;
-        const nesionCost = gpus * 49;
+        const vramSavings = gpuCostPerMonth * 0.23;
+        const nesionCost = gpus * 29;
         const netSavings = vramSavings - nesionCost;
 
         valCost.textContent = `$${formatter.format(nesionCost)} / month`;
@@ -473,8 +473,8 @@
             return;
         }
         
-        if (gpus < 4) {
-            errorEl.textContent = "Enterprise licenses require a minimum of 4 GPUs.";
+        if (gpus < 2) {
+            errorEl.textContent = "Enterprise licenses require a minimum of 2 GPUs.";
             errorEl.style.display = 'block';
             return;
         }
@@ -499,8 +499,8 @@
                 // Mock request
                 await new Promise(r => setTimeout(r, 1200));
                 resData = {
-                    license_key: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZW1vX3V1aWQiLCJpc3MiOiJuZXNpb24ubmV0IiwiaWF0IjoxNzEzNzMwODAzLCJncHVfbGltaXQiOjgsInRpZXIiOiJlbnRlcnByaXNlIn0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-                    paypal_approval_url: "https://www.paypal.com/checkoutnow?token=test_12345"
+                    license_key: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZW1vX3V1aWQiLCJpc3MiOiJuZXNpb22ubmV0IiwiaWF0IjoxNzEzNzMwODAzLCJncHVfbGltaXQiOjgsInRpZXIiOiJlbnRlcnByaXNlIn0.SflKxwRJSMeKKF2QT2fwpMeJf36POk6yJV_adQssw5c",
+                    paypal_approval_url: "https://www.paypal.com/checkoutnow?token=test_12325"
                 };
             } else {
                 // We use your ADMIN_TOKEN here for POST /v1/license/create if this form is public? 
